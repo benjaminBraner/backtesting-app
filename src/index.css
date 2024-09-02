@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #1c1c1c, #282828);
+  font-family: 'Roboto', sans-serif;
+  color: #f0f0f0;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: #f0f0f0;
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.btn-op {
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-op:hover {
+  transform: translateY(-2px);
+}
+
+.loss {
+  background-color: #e27f7f;
+  color: white;
+}
+
+.profit {
+  background-color: #7fe294;
+  color: white;
+}
+
+.historial {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.iniciar {
+  background-color: #007bff; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  color: #fff;
+  font-weight: bold; 
+  font-size: 16px; 
+  width: min-content;
+  margin: 20px 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.iniciar:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05);
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  color: #999;
+  background-color: #cfcfcf34;
+  pointer-events: none;
+}
+
+
+.editar {
+  background-color: #007bff; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  color: #fff;
+  font-weight: bold; 
+  font-size: 16px; 
+  width: min-content;
+  margin: 20px auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.editar:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05);
+}
+
+/* <HistoryChild/> --------------------------------------------------------------------------------*/
+.registro {
+  background-color: #444;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  position: relative; /* Needed for tooltip positioning */
+}
+
+.profit-reg {
+  border-left: 5px solid #7fe294;
+}
+
+.loss-reg {
+  border-left: 5px solid #e27f7f;
+}
+
+.pnl-profit {
+  color: #0ecb81;
+  font-weight: 500;
+}
+
+.pnl-loss {
+  color: #f6465d;
+  font-weight: 500;
+}
+
+.btn-del img {
+  width: 20px;
+  cursor: pointer;
+}
+
+.btn-del {
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-del:hover {
+  transform: scale(1.1);
+}
+
+.btn-del:hover img {
+  filter: hue-rotate(-50deg) brightness(1.5);
+}
+
+.tooltiptext {
+  display: none;
+}
+
+.tooltip {
+  border: 3px solid #FFD700;
+}
+
+.tooltip .tooltiptext {
+  display: block;
+  visibility: hidden;
+  color: #4b4b4b;
+  background-color: #e9e9e9;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 85%; 
+  left: 50%;
+  margin-left: -25px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+label{
+  margin-right: 10px;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+  width: 110px;
+}
+
