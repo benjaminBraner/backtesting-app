@@ -3,10 +3,8 @@ import { StatsContext } from './context/StatsContext'
 import { HistoryChild } from './HistoryChild'
 
 export const History = () => {
-	const { historial} =
-		useContext(StatsContext)
+	const { historial } = useContext(StatsContext)
 
-	
 	return (
 		<div className="historial">
 			{historial.map(
@@ -18,7 +16,9 @@ export const History = () => {
 					capital,
 					riesgoEnOperacion,
 					distanciaProfitEnOperacion,
-					hasChanged
+					hasChanged,
+					riesgoCambio,
+					distanciaProfitCambio
 				}) => (
 					<HistoryChild
 						key={nOperacion}
@@ -30,6 +30,8 @@ export const History = () => {
 						riesgoEnOperacion={riesgoEnOperacion}
 						distanciaProfitEnOperacion={distanciaProfitEnOperacion}
 						hasChanged={hasChanged}
+						riesgoCambio={riesgoCambio}
+						distanciaProfitCambio={distanciaProfitCambio}
 					/>
 				)
 			)}

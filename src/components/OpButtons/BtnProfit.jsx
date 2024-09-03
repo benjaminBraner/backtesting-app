@@ -24,32 +24,39 @@ export const BtnProfit = ({btnIniciarClicked, btnEditarClicked}) => {
 	const clickBtnProfit = (e) => {
 		e.preventDefault();
 		let profit = distanciaProfit?  distanciaProfit : parseFloat(prompt('Porcentaje de profit de la operacion'))
+		if (isNaN(profit)) {
+			return;
+		}
 		let riesgoComoFactor = (riesgo) / 100
 		let capitalMasGanancia = capitalActual + ((capitalActual * (riesgoComoFactor*profit)))
+		console.log(profit)
 		const nuevoHistorial = [
-			...historial, 
 			{
 				nOperacion: operaciones+1, 
-				PnL: parseFloat((capitalMasGanancia.toFixed(2) - capitalActual).toFixed(2)) ,
+				PnL: parseFloat((parseFloat(capitalMasGanancia).toFixed(2) - capitalActual).toFixed(2)) ,
 				tipo: "Profit",
 				porcentaje: profit,
-				capital: parseFloat(capitalMasGanancia.toFixed(2)),
+				capital: parseFloat(parseFloat(capitalMasGanancia).toFixed(2)),
 				riesgoEnOperacion: parseFloat(riesgo),
-				distanciaProfitEnOperacion: parseFloat(distanciaProfit),
-				hasChanged: historial[historial.length-1]?.riesgoEnOperacion != riesgo || historial[historial.length-1]?.distanciaProfitEnOperacion != distanciaProfit 
-			}
+				distanciaProfitEnOperacion: parseFloat(profit),
+				hasChanged: historial[0]?.riesgoEnOperacion != riesgo || historial[0]?.distanciaProfitEnOperacion != distanciaProfit,
+				riesgoCambio: historial[0]?.riesgoEnOperacion != riesgo,
+				distanciaProfitCambio: historial[0]?.distanciaProfitEnOperacion != distanciaProfit,
+			},
+			...historial, 
 		]
-
+console.log(stats)
 		setStats({
 			...stats, 
 			ganadoras: ganadoras + 1, 
 			operaciones: operaciones + 1,
-			capitalActual: parseFloat(capitalMasGanancia.toFixed(2)),
+			capitalActual: parseFloat(parseFloat(capitalMasGanancia).toFixed(2)),
 			rachaMaxGanadora: contarSecuencia(nuevoHistorial).maxRachaGanadora,
 			porcentajeGanado: calcPorcentajeGanado(capitalInicial, capitalMasGanancia),
-			dineroGanado: (parseFloat(capitalMasGanancia.toFixed(2)) - capitalInicial).toFixed(2)
+			dineroGanado: parseFloat((parseFloat(capitalMasGanancia).toFixed(2) - capitalInicial).toFixed(2))
 		})
 		setHistorial(nuevoHistorial)
+		console.log(nuevoHistorial)
 	}
 	return (
 		<button className="btn-op profit" onClick={clickBtnProfit}>

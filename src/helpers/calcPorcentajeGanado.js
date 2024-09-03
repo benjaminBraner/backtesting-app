@@ -5,6 +5,6 @@ export const calcPorcentajeGanado = (capitalInicial, capitalActual) => {
 	}
  
 	const porcentajeGanado = ((capitalActual - capitalInicial) / capitalInicial) * 100;
-	return porcentajeGanado.toFixed(2);
+	return parseFloat(porcentajeGanado.toFixed(2));
  
 };

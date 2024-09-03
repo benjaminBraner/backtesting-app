@@ -24,8 +24,8 @@ export const BtnLoss = ({btnIniciarClicked, btnEditarClicked}) => {
 		e.preventDefault()
 		let riesgoComoFactor = riesgo / 100;
 		let capitalMenosGanancia = capitalActual - (capitalActual * riesgoComoFactor)
+		console.log(distanciaProfit)
 		const nuevoHistorial = [
-			...historial, 
 			{
 				nOperacion: operaciones+1, 
 				PnL: parseFloat((capitalMenosGanancia - capitalActual).toFixed(2)) ,
@@ -34,9 +34,11 @@ export const BtnLoss = ({btnIniciarClicked, btnEditarClicked}) => {
 				capital: parseFloat(capitalMenosGanancia.toFixed(2)),
 				riesgoEnOperacion: parseFloat(riesgo),
 				distanciaProfitEnOperacion: parseFloat(distanciaProfit),
-				hasChanged: historial[historial.length-1]?.riesgoEnOperacion != riesgo || historial[historial.length-1]?.distanciaProfitEnOperacion != distanciaProfit 
-
-			}
+				hasChanged: historial[0]?.riesgoEnOperacion != riesgo || historial[0]?.distanciaProfitEnOperacion != distanciaProfit,
+				riesgoCambio: historial[0]?.riesgoEnOperacion != riesgo,
+				distanciaProfitCambio: historial[0]?.distanciaProfitEnOperacion != distanciaProfit,
+			},
+			...historial, 
 		]
 
 
@@ -47,7 +49,7 @@ export const BtnLoss = ({btnIniciarClicked, btnEditarClicked}) => {
 			capitalActual: parseFloat(capitalMenosGanancia.toFixed(2)),
 			rachaMaxPerdedora: contarSecuencia(nuevoHistorial).maxRachaPerdedora,
 			porcentajeGanado: calcPorcentajeGanado(capitalInicial, capitalMenosGanancia),
-			dineroGanado: parseFloat(parseFloat(capitalMenosGanancia) - capitalInicial).toFixed(2)
+			dineroGanado: parseFloat((parseFloat(capitalMenosGanancia) - capitalInicial).toFixed(2))
 
 		})
 		setHistorial(nuevoHistorial)

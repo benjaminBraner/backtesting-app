@@ -1,8 +1,8 @@
 import deleteImg from '../assets/delete.svg'
 import { contarSecuencia } from '../helpers/contarSecuencia'
 import { calcPorcentajeGanado } from '../helpers/calcPorcentajeGanado'
-import { useContext } from 'react';
-import { StatsContext } from './context/StatsContext';
+import { useContext } from 'react'
+import { StatsContext } from './context/StatsContext'
 
 export const HistoryChild = ({
 	nOperacion,
@@ -12,15 +12,34 @@ export const HistoryChild = ({
 	capital,
 	riesgoEnOperacion,
 	distanciaProfitEnOperacion,
-  hasChanged
+	hasChanged,
+	riesgoCambio,
+distanciaProfitCambio
 }) => {
-
 	const { stats, setStats, historial, setHistorial } =
 		useContext(StatsContext)
 
-		const {ganadoras, perdedoras, operaciones, capitalActual, capitalInicial} = stats
+	const {
+		ganadoras,
+		perdedoras,
+		operaciones,
+		capitalActual,
+		capitalInicial,
+		profitDefinido
+	} = stats
 
-  const clickBtnEliminar = (nOperacion) => {
+	const x = () => {
+		if (!profitDefinido && !riesgoCambio) {
+			return "tooltip"
+		} else if (!profitDefinido && riesgoCambio) {
+			return "tooltip border-golden"
+		} else if (hasChanged && profitDefinido) {
+			return "tooltip border-golden"
+		}
+	}
+console.log(x())
+
+	const clickBtnEliminar = (nOperacion) => {
 		const nuevoHistorial = historial.filter(
 			(op) => op.nOperacion !== nOperacion
 		)
@@ -49,31 +68,39 @@ export const HistoryChild = ({
 		})
 		setHistorial(nuevoHistorial)
 	}
+	// console.log(riesgoEnOperacion)
+	// console.log(distanciaProfitEnOperacion)
+	// console.log(porcentaje)
 
-
-
-  return (
-    <div className={`registro ${tipo.toLowerCase()}-reg ${hasChanged? "tooltip": ""}`}>
-      <span className="tooltiptext">{`riesgo: ${riesgoEnOperacion}% profit: 1:${distanciaProfitEnOperacion}`}</span>
-      <div>{nOperacion}.</div>
-      <div className={`pnl-${tipo.toLowerCase()}`}>{tipo}</div>
-      <div className={`pnl-${tipo.toLowerCase()}`}>
-        PnL: {tipo.toLowerCase() === 'profit' ? '+' : ''}
-        {PnL}$
-      </div>
-      <div>
-        Roi:{' '}
-        {tipo.toLowerCase() === 'profit'
-          ? `+${riesgoEnOperacion * distanciaProfitEnOperacion}%`
-          : `-${porcentaje}%`}
-      </div>
-      <div>{capital}$</div>
-      <div
-        className="btn-del"
-        onClick={() => clickBtnEliminar(nOperacion)}
-      >
-        <img src={deleteImg} alt="delete" />
-      </div>
-    </div>
-  );
-};
+	return (
+		// <div
+		// 	className={`registro ${tipo.toLowerCase()}-reg ${
+		// 		hasChanged ? 'tooltip' : ''
+		// 	}`}
+		// >
+		<div
+			className={`registro ${tipo.toLowerCase()}-reg ${x()}`}
+		>
+			<span className="tooltiptext">{`riesgo: ${riesgoEnOperacion}% profit: 1:${distanciaProfitEnOperacion}`}</span>
+			<div>{nOperacion}.</div>
+			<div className={`pnl-${tipo.toLowerCase()}`}>{tipo}</div>
+			<div className={`pnl-${tipo.toLowerCase()}`}>
+				PnL: {tipo.toLowerCase() === 'profit' ? '+' : ''}
+				{PnL}$
+			</div>
+			<div>
+				Roi:{' '}
+				{tipo.toLowerCase() === 'profit'
+					? `+${riesgoEnOperacion * distanciaProfitEnOperacion}%`
+					: `-${porcentaje}%`}
+			</div>
+			<div>{capital}$</div>
+			<div
+				className="btn-del"
+				onClick={() => clickBtnEliminar(nOperacion)}
+			>
+				<img src={deleteImg} alt="delete" />
+			</div>
+		</div>
+	)
+}
