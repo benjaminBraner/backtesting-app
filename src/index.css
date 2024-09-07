@@ -16,7 +16,11 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
-
+button {
+  outline: none;
+     border: none;
+     font-weight: 500;
+}
 .container {
   background-color: #333;
   padding: 20px;
@@ -48,12 +52,12 @@ input {
 }
 
 .loss {
-  background-color: #e27f7f;
+  background-color: #e2464a;
   color: white;
 }
 
 .profit {
-  background-color: #7fe294;
+  background-color: #20ac95;
   color: white;
 }
 
@@ -65,7 +69,7 @@ input {
 }
 
 .iniciar {
-  background-color: #007bff; 
+  background-color: #0047ff; 
   padding: 10px 20px; 
   border-radius: 5px; 
   color: #fff;
@@ -91,7 +95,7 @@ select:disabled {
 
 
 .editar {
-  background-color: #007bff; 
+  background-color: #0047ff; 
   padding: 10px 20px; 
   border-radius: 5px; 
   color: #fff;
@@ -120,20 +124,20 @@ select:disabled {
 }
 
 .profit-reg {
-  border-left: 5px solid #7fe294;
+  border-left: 5px solid #20ac95;
 }
 
 .loss-reg {
-  border-left: 5px solid #e27f7f;
+  border-left: 5px solid #e2464a;
 }
 
 .pnl-profit {
-  color: #0ecb81;
+  color: #20ac95;
   font-weight: 500;
 }
 
 .pnl-loss {
-  color: #f6465d;
+  color: #e2464a;
   font-weight: 500;
 }
 
