@@ -16,7 +16,7 @@ export const BtnProfit = ({btnIniciarClicked, btnEditarClicked}) => {
 	} = stats;
 
 	useEffect(() => {
-		const btnProfit = document.querySelector('.profit')
+		const btnProfit = document.querySelector('.btn-profit')
 		btnProfit.disabled = !btnIniciarClicked || btnEditarClicked
 	}, [btnIniciarClicked, btnEditarClicked])
 	
@@ -59,7 +59,7 @@ console.log(stats)
 		console.log(nuevoHistorial)
 	}
 	return (
-		<button className="btn-op profit" onClick={clickBtnProfit}>
+		<button className="btn-profit" onClick={clickBtnProfit}>
 			Profit
 		</button>
 	)

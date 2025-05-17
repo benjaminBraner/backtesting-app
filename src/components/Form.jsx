@@ -11,7 +11,7 @@ export const Form = () => {
 
 	useEffect(() => {
 		const btnEditar = document.querySelector('.editar')
-		btnEditar.disabled = !btnIniciarClick;
+		btnEditar.disabled = !btnIniciarClick
 	}, [])
 
 	const domComponents = () => {
@@ -41,18 +41,10 @@ export const Form = () => {
 	}
 
 	const clickBtnIniciar = (e) => {
-		const {
-			inputCapital,
-			inputRiesgo,
-			inputDistanciaProfit,
-			inputs,
-			btnIniciar,
-			btnEditar
-		} = domComponents()
+		const { inputCapital, inputRiesgo, inputDistanciaProfit, inputs, btnIniciar, btnEditar } = domComponents()
 		e.preventDefault()
 
-		const msgCapitalRiesgoVacios =
-			'Capital y Riesgo% no pueden estar vacios'
+		const msgCapitalRiesgoVacios = 'Capital y Riesgo% no pueden estar vacios'
 
 		if (!inputCapital.value || !inputRiesgo.value) {
 			alert(msgCapitalRiesgoVacios)
@@ -61,11 +53,7 @@ export const Form = () => {
 
 		const profitDefinido = parseFloat(inputDistanciaProfit.value)
 
-		profitDefinido
-			? alert(
-					`tus operaciones se haran de distancia 1 a ${profitDefinido}`
-			  )
-			: ''
+		profitDefinido ? alert(`tus operaciones se haran de distancia 1 a ${profitDefinido}`) : ''
 
 		let capitalValue = parseFloat(inputCapital.value)
 		let riesgoValue = parseFloat(inputRiesgo.value)
@@ -86,58 +74,61 @@ export const Form = () => {
 		setBtnIniciarClick(true)
 	}
 
-
 	const clickBtnEditar = (e) => {
 		e.preventDefault()
 		const { inputRiesgo, inputDistanciaProfit, btnEditar } = domComponents()
-		
+
 		const isEditing = btnEditar.textContent === 'Editar'
 		inputRiesgo.disabled = !isEditing
 		inputDistanciaProfit.disabled = !isEditing
-		btnEditar.textContent = isEditing ? 'Aceptar' : 'Editar';
+		btnEditar.textContent = isEditing ? 'Aceptar' : 'Editar'
 
-		setStats({...stats, riesgo: inputRiesgo.value, distanciaProfit: inputDistanciaProfit.value})
+		setStats({ ...stats, riesgo: inputRiesgo.value, distanciaProfit: inputDistanciaProfit.value })
 		setBtnEditarClick(!btnEditarClick)
 	}
-	
+
 	return (
-		<form>
-			<input
-				type="text"
-				placeholder="Nombre Estrategia"
-				id="name-strat"
-			/>
-
-			<div className="h">
-				<div className="inp-cont">
-					<label htmlFor="">Capital</label>
-					<input type="number" className="capital" />
-				</div>
-				<div className="inp-cont">
-					<label htmlFor="">Riesgo %</label>
-					<input type="number" className="riesgo" />
-				</div>
-				<div className="inp-cont">
-					<label htmlFor="">Distancia profit 1:</label>
-					<input type="number" className="distancia-profit" />
-				</div>
+		<>
+		
+		<section className="form-section">
+			<div className="input-group">
+				<input type="text" id="nombre" placeholder="" required className={btnIniciarClick ? 'box disabled' : 'box'} disabled={btnIniciarClick} />
+				<label htmlFor="nombre">Nombre Estrategia</label>
 			</div>
 
-			<div className="inp-cont j">
-				<label htmlFor="">N° operaciones</label>
-				<input type="number" className="n-operaciones" />
+			<div className="input-group">
+				<input type="number" id="capital" placeholder="" className={btnIniciarClick ? 'capital box disabled' : 'capital box'} disabled={btnIniciarClick} required />
+				<label htmlFor="capital">Capital</label>
 			</div>
-			<button type="submit" className="iniciar" onClick={clickBtnIniciar}>
-				Iniciar
-			</button>
-			<button type="button" className="editar" onClick={clickBtnEditar}>
-				Editar
-			</button>
+			<div className="input-group">
+				<input type="number" id="riesgo" placeholder="" required className={btnIniciarClick ? 'riesgo box disabled' : 'riesgo box'} disabled={btnIniciarClick} />
+				<label htmlFor="riesgo">Riesgo %</label>
+			</div>
+			<div className="input-group">
+				<input type="number" id="distancia" placeholder="" required className={btnIniciarClick ? 'distancia-profit box disabled' : 'distancia-profit box'}  disabled={btnIniciarClick} />
+				<label htmlFor="distancia">Distancia Profit 1:X</label>
+			</div>
 
-			<div className="k">
-				<BtnLoss btnIniciarClicked={btnIniciarClick} btnEditarClicked={btnEditarClick}/>
-				<BtnProfit btnIniciarClicked={btnIniciarClick} btnEditarClicked={btnEditarClick}/>
+			<div className="input-group">
+				<input type="number" id="n-operaciones" placeholder="" required className="box" disabled={btnIniciarClick} />
+				<label htmlFor="n-operaciones">N de Operaciones</label>
 			</div>
-		</form>
+
+			<div className="btn-group">
+				<button className={btnIniciarClick ? 'btn-start iniciar disabled' : 'btn-start iniciar'} onClick={clickBtnIniciar}>
+					Iniciar
+				</button>
+				<button className="btn-edit editar" onClick={clickBtnEditar}>
+					Editar
+				</button>
+			</div>
+
+
+		</section>
+			<section className="operation-buttons">
+					<BtnProfit btnIniciarClicked={btnIniciarClick} btnEditarClicked={btnEditarClick} />
+					<BtnLoss btnIniciarClicked={btnIniciarClick} btnEditarClicked={btnEditarClick} />
+			</section>
+		</>
 	)
 }

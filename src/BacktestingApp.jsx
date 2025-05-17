@@ -26,13 +26,11 @@ export const BacktestingApp = () => {
 	return (
 		<StatsContext.Provider value={{stats, setStats, historial, setHistorial}}>
 
-			<div className="father">
+			<div className="container">
 				<h1>Backtesting</h1>
-				<div className="container">
 					<Form />
 					<Stats />
 					<History />
-				</div>
 			</div>
 
 		</StatsContext.Provider>
